@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { FaceFrownIcon } from "@heroicons/react/24/solid";
+import MessageScreen from "../components/MessageScreen";
 
 function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } =
@@ -14,7 +16,12 @@ function CartPage() {
   if (cartItems.length === 0) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-12 text-center">
-        <h2 className="text-2xl font-playfair mb-4">Your Cart is Empty</h2>
+        <MessageScreen
+          icon={<FaceFrownIcon className="w-20 h-20 mx-auto text-stone-500" />}
+          title="Your cart is empty"
+          description="Looks like you haven't made your choice yet!"
+        />
+
         <Link to="/" className="text-sage hover:underline text-lg">
           ← Back to Products
         </Link>

@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import MessageScreen from "../components/MessageScreen";
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -32,7 +33,7 @@ function ProductDetailPage() {
   };
 
   if (loading) {
-    return <div className="text-center py-10">Loading product...</div>;
+    return <MessageScreen loading text="Loading product..." />;
   }
 
   if (!product) {

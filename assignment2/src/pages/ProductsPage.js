@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import MessageScreen from "../components/MessageScreen";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -11,15 +13,26 @@ function ProductsPage() {
       .then((data) => {
         setProducts(data);
         setLoading(false);
+        setError(null);
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
+        setError("Unable to load products. Please try again later.");
         setLoading(false);
       });
   }, []);
 
   if (loading) {
-    return <div className="text-center py-10">Loading products...</div>;
+    return <MessageScreen loading text="Loading products..." />;
+  }
+
+  if (error) {
+    return (
+      <MessageScreen
+        title="Unable to load products"
+        description="Please try again later."
+      />
+    );
   }
 
   return (

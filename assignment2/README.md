@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is the initial setup for a shopping site web application built using React.js and TailwindCSS. The current implementation includes a vintage neutral theme and a Navbar component.
+This is the initial setup for a shopping site web application built using React.js and TailwindCSS.
 
 ---
 

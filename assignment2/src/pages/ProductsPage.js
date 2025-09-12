@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch products from Fake Store API
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
@@ -29,9 +29,10 @@ function ProductsPage() {
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
-          <div
+          <Link
             key={product.id}
-            className="bg-cream rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex flex-col"
+            to={`/products/${product.id}`}
+            className="bg-cream rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex flex-col cursor-pointer"
           >
             <img
               src={product.image}
@@ -49,7 +50,7 @@ function ProductsPage() {
                 ${product.price}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

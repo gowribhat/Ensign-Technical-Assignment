@@ -30,3 +30,23 @@ This document outlines the technical decisions and assumptions made during the i
 - **Responsive Layout with TailwindCSS Grid**
   - Used Tailwind’s `grid` utilities for responsive product card layout.
   - Assumes grid layout is the natural choice for e-commerce displays.
+
+### 3. Product Details Page
+
+- **Routing with React Router**
+
+  - `react-router-dom` used for navigation.
+  - Dynamic route `/products/:id` to fetch individual product details.
+  - `useParams` hook allows retrieval of product ID.
+
+- **Product Layout**
+
+  - Full-page layout to provide focus on product details.
+  - Responsive two-column layout (`flex-col md:flex-row`) for image and details.
+  - Typography hierarchy with clear title, description, price for readability.
+
+- **Quantity Selector**
+  - Numeric input with increment/decrement buttons implemented using `useState`.
+  - Prevents quantity below 1 or non positive integer values.
+  - Button label dynamically updates to reflect chosen quantity.
+  - Improves usability and aligns with typical e-commerce expectations.

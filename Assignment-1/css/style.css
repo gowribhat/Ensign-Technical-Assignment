@@ -1,0 +1,173 @@
+/* General */
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    background: #f5f6f8;
+    color: #333;
+}
+
+/* Header */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    width: 32px;
+}
+
+.app-name {
+    font-family: "Dancing Script", cursive;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.search {
+    flex: 1;
+    max-width: 900px;
+    margin: 0 20px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background: #fefefe;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.search::placeholder {
+    color: #aaa;
+    font-weight: 400;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+/* Board Layout */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.column h2 {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+/* Cards - General */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+/* Cards - Badge */
+.badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 24px;
+}
+
+.badge.blue {
+    background: #3b82f6;
+}
+
+.badge.purple {
+    background: #a855f7;
+}
+
+.badge.teal {
+    background: #14b8a6;
+}
+
+/* Cards - Dates */
+.date {
+    font-size: 12px;
+    color: #666;
+}
+
+.date.red {
+    color: #ef4444;
+}
+
+.date.green {
+    color: #10b981;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .board {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .search {
+        max-width: 200px;
+    }
+}

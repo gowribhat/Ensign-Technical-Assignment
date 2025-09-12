@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import { CartContext } from "../contexts/CartContext";
 
 function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -81,7 +84,10 @@ function ProductDetailPage() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <button className="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition font-medium w-fit">
+            <button
+              onClick={() => addToCart(product, quantity)}
+              className="bg-sage text-white px-6 py-3 rounded-lg hover:bg-sage-700 transition font-medium w-fit"
+            >
               Add {quantity} to Cart
             </button>
             <Link

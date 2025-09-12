@@ -28,6 +28,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Assumes cart state will later require global management (e.g., React Context).
 
 - **Responsive Layout with TailwindCSS Grid**
+
   - Used Tailwind’s `grid` utilities for responsive product card layout.
   - Assumes grid layout is the natural choice for e-commerce displays.
 
@@ -46,7 +47,30 @@ This document outlines the technical decisions and assumptions made during the i
   - Typography hierarchy with clear title, description, price for readability.
 
 - **Quantity Selector**
+
   - Numeric input with increment/decrement buttons implemented using `useState`.
   - Prevents quantity below 1 or non positive integer values.
   - Button label dynamically updates to reflect chosen quantity.
   - Improves usability and aligns with typical e-commerce expectations.
+
+### 4. Shopping Cart
+
+- **Global State Management with React Context**
+
+  - Created a `CartContext` to manage cart items globally.
+  - Provides functions to add, remove, update quantity, and clear cart.
+  - Chose Context + `useState` over Redux due to the small scale of the application.
+
+- **Persistence with LocalStorage**
+
+  - Cart data is saved in `localStorage` whenever items are added, removed, or quantities updated.
+  - On app load, cart initializes from `localStorage` if present.
+  - Justification: Provides persistence across browser reloads and closures without needing a backend.
+
+- **Cart Page Layout**
+
+  - Lists all products added to the cart with image, title, price, quantity selector, and remove button.
+  - Quantity selector allows increment/decrement and manual entry (prevents zero or negative values).
+  - Displays total amount dynamically.
+  - Includes "Clear Cart" button for convenience.
+  - Responsive design using TailwindCSS (`flex-col md:flex-row` for each item).

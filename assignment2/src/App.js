@@ -1,18 +1,13 @@
-import React from "react";
 import Navbar from "./components/Navbar";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
-    return (
-        <div className="App">
-            <Navbar />
-            <main className="p-4">
-                <h1 className="text-2xl font-bold">
-                    Welcome to the Shopping App!
-                </h1>
-                <p className="mt-2">This is your simple starting page.</p>
-            </main>
-        </div>
-    );
+  return (
+    <div className="bg-background min-h-screen">
+      <Navbar />
+      <ProductsPage />
+    </div>
+  );
 }
 
 export default App;

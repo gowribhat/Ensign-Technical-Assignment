@@ -10,13 +10,19 @@ function App() {
   return (
     <CartProvider>
       <Router>
-        <Navbar />
-        <Toaster position="bottom-left" toastOptions={{ duration: 1500 }} />
-        <Routes>
-          <Route path="/" element={<ProductsPage />} />
-          <Route path="/products/:id" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
+        <div className="min-h-screen flex flex-col">
+          <header className="h-fit flex-none">
+            <Navbar />
+          </header>
+          <main className="flex-1 flex items-center justify-center">
+            <Toaster position="bottom-left" toastOptions={{ duration: 1500 }} />
+            <Routes>
+              <Route path="/" element={<ProductsPage />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+            </Routes>
+          </main>
+        </div>
       </Router>
     </CartProvider>
   );

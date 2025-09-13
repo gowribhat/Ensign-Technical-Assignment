@@ -5,10 +5,22 @@
 
 /* Global styles */
 body {
-    @apply bg-bg font-body text-text-primary;
+  @apply bg-bg font-body text-text-primary;
+  overflow-y: scroll; /* allows vertical scrolling */
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* For modern browsers (Chrome, Edge, Safari) */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: none; /* hides scrollbar but still scrollable */
+  -ms-overflow-style: none; /* for IE 10+ */
 }

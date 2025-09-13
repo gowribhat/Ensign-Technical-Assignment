@@ -124,9 +124,7 @@ function CartPage() {
                     idx % 2 === 0 ? "bg-stone-200" : "bg-stone-100"
                   }`}
                 >
-                  <span className="text-sm text-neutral-700 truncate">
-                    {item.title}
-                  </span>
+                  <span className="text-sm text-neutral-700">{item.title}</span>
                   <span className="text-center text-sm text-neutral-700">
                     {item.quantity}
                   </span>

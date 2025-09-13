@@ -28,13 +28,24 @@ export function CartProvider({ children }) {
       }
     });
 
-    toast.success(`${quantity} × "${product.title}" added to cart`);
+    toast.success(`${quantity} × ${product.title} added to cart`);
   };
 
   const removeFromCart = (id) => {
     const item = cartItems.find((i) => i.id === id);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-    if (item) toast(`Removed "${item.title}" from cart`);
+    if (item) {
+      toast.custom((t) => (
+        <div
+          className={`${
+            t.visible ? "animate-slideIn" : "animate-slideOut"
+          } flex items-center gap-3 bg-red-600 text-white px-5 py-3 rounded-lg shadow-lg`}
+        >
+          <TrashIcon className="h-6 w-6 animate-pulse" />
+          <span className="font-medium">Removed {item.title}</span>
+        </div>
+      ));
+    }
   };
 
   const updateQuantity = (id, newQuantity) => {
@@ -43,9 +54,6 @@ export function CartProvider({ children }) {
         item.id === id ? { ...item, quantity: newQuantity } : item
       )
     );
-    const item = cartItems.find((i) => i.id === id);
-    if (item)
-      toast.success(`Updated "${item.title}" quantity to ${newQuantity}`);
   };
 
   const clearCart = () => {

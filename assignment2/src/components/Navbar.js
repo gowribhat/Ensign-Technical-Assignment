@@ -8,22 +8,30 @@ export default function Navbar() {
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <nav className="bg-amber-900 text-taupe px-6 py-4 flex justify-between items-center text-rose-200">
-      <Link to="/">
+    <nav className="bg-amber-900 text-taupe px-6 py-4 flex items-center justify-between text-rose-200 relative">
+      <Link to="/" className="flex-shrink-0 ml-4">
         <div className="relative flex flex-col items-center leading-none">
           <span className="absolute text-7xl font-playfair text-rose-300/50 select-none">
             &amp;
           </span>
-          <span className="relative font-playfair text-2xl text-rose-200 tracking-wide -ml-12">
+          <span className="relative font-playfair text-3xl text-rose-200 tracking-wide -ml-12">
             Olive
           </span>
-          <span className="relative font-playfair text-2xl text-rose-200 tracking-wide ml-12">
+          <span className="relative font-playfair text-3xl text-rose-200 tracking-wide ml-12">
             Oak
           </span>
         </div>
       </Link>
 
-      <Link to="/cart">
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-1/3">
+        <input
+          type="text"
+          placeholder="Search any product..."
+          className="w-full rounded-lg px-4 py-2 text-neutral-800 focus:outline-none focus:ring-2 focus:ring-amber-300"
+        />
+      </div>
+
+      <Link to="/cart" className="flex-shrink-0 mr-4">
         <div className="relative hover:text-rose-300 cursor-pointer transition">
           <ShoppingCartIcon className="w-8 h-8" />
           {totalQuantity > 0 && (

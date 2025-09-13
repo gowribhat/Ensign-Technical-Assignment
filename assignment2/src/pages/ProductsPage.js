@@ -37,37 +37,34 @@ function ProductsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <div className="flex items-center gap-3 mb-8">
-        <h1 className="text-4xl md:text-5xl font-serif text-amber-900">
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        <h1 className="text-4xl md:text-5xl font-serif text-amber-900 mb-8">
           Our Products
         </h1>
-      </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <Link
-            key={product.id}
-            to={`/products/${product.id}`}
-            className="bg-cream rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex flex-col cursor-pointer"
-          >
-            <img
-              src={product.image}
-              alt={product.title}
-              className="h-40 object-contain mb-4"
-            />
-            <h2 className="font-playfair text-lg mb-2 line-clamp-2">
-              {product.title}
-            </h2>
-            <p className="text-sm text-neutral-600 line-clamp-3 mb-4">
-              {product.description}
-            </p>
-            <div className="mt-auto flex items-center justify-between">
-              <span className="font-semibold text-green-700">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((product) => (
+            <Link
+              key={product.id}
+              to={`/products/${product.id}`}
+              className="bg-white border border-stone-200 shadow-sm hover:shadow-lg transition duration-300 transform hover:scale-105 p-4 flex flex-col cursor-pointer"
+            >
+              <div className="h-36 flex items-center justify-center mb-4">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="max-h-full object-contain"
+                />
+              </div>
+              <h2 className="font-playfair text-lg font-bold text-amber-900 mb-2 line-clamp-2">
+                {product.title}
+              </h2>
+              <div className="mt-auto text-lg font-semibold text-green-700">
                 ${product.price}
-              </span>
-            </div>
-          </Link>
-        ))}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

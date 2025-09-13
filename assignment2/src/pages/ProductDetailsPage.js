@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import MessageScreen from "../components/MessageScreen";
-import { StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
 import NumberSelector from "../components/NumberSelector";
 
 function ProductDetailPage() {
@@ -58,6 +58,14 @@ function ProductDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
+      <Link
+        to="/"
+        className="mb-8 inline-flex items-center gap-2 text-amber-800 hover:text-stone-600 transition w-fit text-base"
+      >
+        <ChevronLeftIcon className="h-5 w-5" />
+        <span className="font-medium">Back to Products</span>
+      </Link>
+
       <div className="flex flex-col md:flex-row gap-12">
         <div className="flex-1 flex items-start justify-center">
           <img
@@ -114,20 +122,14 @@ function ProductDetailPage() {
               onClick={handleAddToCart}
               disabled={adding}
               className={`px-6 py-3 rounded-lg font-medium w-fit transition 
-                ${
-                  adding
-                    ? "bg-stone-300 text-stone-500 cursor-not-allowed"
-                    : "bg-amber-900 text-rose-100 hover:bg-amber-800"
-                }`}
+              ${
+                adding
+                  ? "bg-stone-300 text-stone-500 cursor-not-allowed"
+                  : "bg-amber-900 text-rose-100 hover:bg-amber-800"
+              }`}
             >
               {adding ? "Adding..." : `Add ${quantity} to Cart`}
             </button>
-            <Link
-              to="/"
-              className="text-sm text-stone-500 hover:text-amber-800 hover:underline w-fit"
-            >
-              ← Back to Products
-            </Link>
           </div>
         </div>
       </div>

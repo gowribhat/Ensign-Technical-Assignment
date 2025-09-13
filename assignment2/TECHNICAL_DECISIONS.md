@@ -119,3 +119,15 @@ This document outlines the technical decisions and assumptions made during the i
 - **Assumptions:**
   - Quantities cannot be negative or zero.
   - Users may either type a number directly or use buttons to adjust quantity.
+
+### 9. Linking Cart Items to Product Details
+
+- **Decision:** Make each product in the cart clickable, linking to its respective product details page (`/products/:id`).
+- **Reasoning:**
+  - **User Experience:** Allows users to quickly revisit product details, check specifications, or adjust quantity before purchasing.
+  - **Consistency:** Mirrors common e-commerce behavior where cart items are interactive.
+  - **Technical Implementation:** Used `react-router-dom`'s `Link` component around the product image and title.
+  - **Layout Consideration:** The link is styled with `flex` to ensure the clickable area is large but doesn’t interfere with quantity selectors or the remove button.
+- **Assumptions:**
+  - Users expect cart items to be interactive.
+  - Only the image and title are clickable, while quantity controls and remove button retain their original functionality.

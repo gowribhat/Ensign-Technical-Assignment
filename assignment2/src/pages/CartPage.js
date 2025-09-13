@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import { FaceFrownIcon } from "@heroicons/react/24/solid";
 import MessageScreen from "../components/MessageScreen";
@@ -35,21 +36,28 @@ function CartPage() {
             key={item.id}
             className="flex flex-col md:flex-row items-center justify-between gap-6 p-4 border-b"
           >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="h-24 object-contain"
-            />
-            <div className="flex-1">
-              <h3 className="font-playfair text-lg">{item.title}</h3>
-              <span className="text-neutral-700">${item.price}</span>
-            </div>
+            <Link
+              to={`/products/${item.id}`}
+              className="flex items-center gap-4 flex-1"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="h-24 object-contain"
+              />
+              <div>
+                <h3 className="font-playfair text-lg">{item.title}</h3>
+                <span className="text-neutral-700">${item.price}</span>
+              </div>
+            </Link>
+
             <div className="flex items-center gap-2">
               <NumberSelector
                 value={item.quantity}
                 onChange={(newQty) => updateQuantity(item.id, newQty)}
               />
             </div>
+
             <button
               onClick={() => removeFromCart(item.id)}
               className="text-red-600 hover:underline"

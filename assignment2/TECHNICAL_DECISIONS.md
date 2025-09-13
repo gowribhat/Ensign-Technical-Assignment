@@ -131,3 +131,24 @@ This document outlines the technical decisions and assumptions made during the i
 - **Assumptions:**
   - Users expect cart items to be interactive.
   - Only the image and title are clickable, while quantity controls and remove button retain their original functionality.
+
+### 10. Cart Page – Sticky Order Summary
+
+**Implementation:**
+
+- The order summary on the right uses `lg:sticky lg:top-24 h-fit` (Tailwind).
+  - `sticky` keeps it visible while scrolling within its container.
+  - `top-24` offsets it from the top to avoid overlapping headers.
+  - `h-fit` adapts height to content.
+- Sticky behavior is **applied only on large screens** (`lg:`) for responsiveness; on smaller screens, the layout stacks naturally.
+
+**Rationale:**
+
+- Keeps critical purchase information (totals, checkout actions) visible to improve usability and encourage conversions.
+- Mirrors familiar e-commerce patterns, enhancing user trust and experience.
+- Tailwind CSS sticky implementation avoids extra JS scroll handling, simplifying code.
+
+**Assumptions:**
+
+- Cart content may vary in length; height adapts dynamically.
+- Mobile users benefit from stacked layout rather than sticky elements to prevent overlap or cramped views.

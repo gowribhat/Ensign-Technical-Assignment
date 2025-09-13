@@ -28,56 +28,107 @@ function CartPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <h2 className="text-3xl font-playfair mb-8">Your Cart</h2>
-      <div className="flex flex-col gap-6">
-        {cartItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col md:flex-row items-center justify-between gap-6 p-4 border-b"
-          >
-            <Link
-              to={`/products/${item.id}`}
-              className="flex items-center gap-4 flex-1"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="h-24 object-contain"
-              />
-              <div>
-                <h3 className="font-playfair text-lg">{item.title}</h3>
-                <span className="text-neutral-700">${item.price}</span>
-              </div>
-            </Link>
+    <div className="max-w-7xl mx-auto px-6 py-12">
+      <h2 className="text-4xl md:text-5xl font-serif text-amber-900 mb-6 flex items-center gap-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8 text-amber-700"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6M17 13l1.2 6M6 19h12"
+          />
+        </svg>
+        Your Cart
+      </h2>
+      <hr className="border-t border-amber-200 mb-8 w-32" />
 
-            <div className="flex items-center gap-2">
-              <NumberSelector
-                value={item.quantity}
-                onChange={(newQty) => updateQuantity(item.id, newQty)}
-              />
+      <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex-1 flex flex-col gap-6">
+          {cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col md:flex-row items-center justify-between gap-6 p-4 rounded-md transition"
+            >
+              <Link
+                to={`/products/${item.id}`}
+                className="flex items-center gap-4 flex-1"
+              >
+                <div className="w-24 h-24 flex items-center justify-center bg-white p-2 rounded-md shadow-sm">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-playfair text-lg">{item.title}</h3>
+                  <span className="text-neutral-700">${item.price}</span>
+                </div>
+              </Link>
+
+              <div className="flex items-center gap-2">
+                <NumberSelector
+                  value={item.quantity}
+                  onChange={(newQty) => updateQuantity(item.id, newQty)}
+                />
+              </div>
+
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="text-red-600 hover:underline"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="lg:w-96 bg-stone-50 p-6 h-fit lg:sticky lg:top-24">
+          <h3 className="text-2xl font-semibold mb-6 border-b border-stone-300 pb-2">
+            Order Summary
+          </h3>
+
+          <div className="flex flex-col gap-2 mb-6">
+            {cartItems.map((item, idx) => (
+              <div
+                key={item.id}
+                className={`grid grid-cols-[2fr_1fr_1fr] items-center p-2  ${
+                  idx % 2 === 0 ? "bg-stone-200" : "bg-stone-100"
+                }`}
+              >
+                <span className="text-sm text-neutral-700">{item.title}</span>
+                <span className="text-center text-sm text-neutral-700">
+                  {item.quantity}
+                </span>
+                <span className="text-right text-sm font-medium text-neutral-900">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-stone-300 pt-4 mb-4">
+            <div className="flex justify-between text-lg font-bold text-amber-800 mb-4">
+              <span>Total</span>
+              <span>${totalAmount.toFixed(2)}</span>
             </div>
 
+            <button className="w-full bg-amber-900 text-rose-100 py-3 rounded-lg font-semibold hover:bg-amber-800 transition mb-2">
+              Proceed to Checkout
+            </button>
             <button
-              onClick={() => removeFromCart(item.id)}
-              className="text-red-600 hover:underline"
+              onClick={clearCart}
+              className="w-full bg-stone-200 text-neutral-700 py-3 rounded-lg font-medium hover:bg-stone-300 transition"
             >
-              Remove
+              Clear Cart
             </button>
           </div>
-        ))}
-
-        <div className="text-right mt-6">
-          <p className="text-3xl font-bold text-amber-800 mb-2">
-            Total: ${totalAmount.toFixed(2)}
-          </p>
-
-          <button
-            onClick={clearCart}
-            className="bg-beige px-6 py-3 rounded hover:bg-[#dcd3c6] transition"
-          >
-            Clear Cart
-          </button>
         </div>
       </div>
     </div>

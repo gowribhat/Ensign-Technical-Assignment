@@ -17,11 +17,13 @@ This document outlines the technical decisions and assumptions made during the i
 ### 2. Products Listing
 
 - **Data Fetching with `fetch` + `useEffect`**
+
   - Used the built-in `fetch` API instead of Axios to avoid extra dependencies.
   - `useEffect` ensures the API call runs once on component mount.
   - Assumes the Fake Store API is reliable and consistent.
 
 - **State Management with `useState`**
+
   - Local state is sufficient since products are only needed in the `ProductsPage`.
   - Assumes cart state will later require global management (e.g., React Context).
 
@@ -32,11 +34,13 @@ This document outlines the technical decisions and assumptions made during the i
 ### 3. Product Details Page
 
 - **Routing with React Router**
+
   - `react-router-dom` used for navigation.
   - Dynamic route `/products/:id` to fetch individual product details.
   - `useParams` hook allows retrieval of product ID.
 
 - **Product Layout**
+
   - Full-page layout to provide focus on product details.
   - Responsive two-column layout (`flex-col md:flex-row`) for image and details.
   - Typography hierarchy with clear title, description, price for readability.
@@ -50,12 +54,14 @@ This document outlines the technical decisions and assumptions made during the i
 ### 4. Shopping Cart
 
 - **Global State Management with React Context**
+
   - Created a `CartContext` to manage cart items globally.
   - Provides functions to add, remove, update quantity, and clear cart.
   - Chose Context + `useState` over Redux due to the small scale of the application.
   - This avoids prop drilling and keeps cart accessible across pages.
 
 - **Persistence with LocalStorage**
+
   - Cart data is saved in `localStorage` whenever items are added, removed, or quantities updated.
   - On app load, cart initializes from `localStorage` if present.
   - Justification: Provides persistence across browser reloads and closures without needing a backend.
@@ -70,6 +76,7 @@ This document outlines the technical decisions and assumptions made during the i
 ### 5. MessageScreen Component
 
 - **Decision:** Created a single `MessageScreen` component to handle all **intermediate page states**, including:
+
   - Loading (`Spinner`)
   - Empty data (e.g., empty cart, no search results)
   - API errors or fetch failures
@@ -80,3 +87,23 @@ This document outlines the technical decisions and assumptions made during the i
   - Simplifies maintenance: changing style, font, or animation in one place updates all relevant pages.
   - Makes it easy to **swap icons** for different states (e.g., frown icon for empty cart, warning triangle for API error).
   - Aligns with **component-based design principles** in React.
+
+### 6. User Feedback on Actions
+
+- **Choice:** Added [react-hot-toast](https://react-hot-toast.com) for visual confirmations (e.g., “Product added to cart”).
+- **Reasoning:**
+  - Provides a lightweight, dependency-free, and highly customizable toast system.
+  - Allows quick, non-intrusive feedback without requiring custom modal or alert implementations.
+  - Offers built-in accessibility (screen-reader support) and theming options that fit well with the UI.
+- **Assumption:** Using a popular, well-documented library like `react-hot-toast` will be acceptable since it balances UX benefits with minimal overhead.
+
+---
+
+### 7. Preventing Duplicate Cart Entries
+
+- **Choice:** Introduced an `adding` state (`useState`) for the "Add to Cart" button.
+- **Reasoning:**
+  - Prevents accidental multiple submissions if a user double-clicks quickly.
+  - Improves UX by disabling the button briefly and providing real-time feedback (`Adding...` state).
+  - Keeps logic simple and contained within the component — no need for external state management here.
+- **Technical Note:** Used `setTimeout` to re-enable the button after a short delay (500ms). This ensures a balance between responsiveness and safety.

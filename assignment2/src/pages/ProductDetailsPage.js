@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import toast, { Toaster } from "react-hot-toast";
 import MessageScreen from "../components/MessageScreen";
 
 function ProductDetailPage() {
@@ -8,6 +9,7 @@ function ProductDetailPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [adding, setAdding] = useState(false);
 
   const { addToCart } = useContext(CartContext);
 
@@ -32,53 +34,69 @@ function ProductDetailPage() {
     }
   };
 
+  const handleAddToCart = () => {
+    if (adding) return; // prevent multiple clicks
+    setAdding(true);
+
+    addToCart(product, quantity);
+    setQuantity(1);
+    toast.success(`${quantity} × ${product.title} added to cart`);
+
+    setTimeout(() => setAdding(false), 500);
+  };
+
   if (loading) {
     return <MessageScreen loading text="Loading product..." />;
   }
 
   if (!product) {
-    return <div className="text-center py-10">Product not found.</div>;
+    return (
+      <MessageScreen
+        title="Product not found"
+        description="We couldn’t find the product you’re looking for."
+      />
+    );
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 py-16">
       <div className="flex flex-col md:flex-row gap-12">
         <div className="flex-1 flex items-start justify-center">
           <img
             src={product.image}
             alt={product.title}
-            className="max-h-[500px] object-contain"
+            className="max-h-[500px] object-contain drop-shadow-md bg-white p-6 rounded-lg"
           />
         </div>
 
         <div className="flex-1 flex flex-col justify-start">
-          <h1 className="text-4xl font-playfair mb-6 text-neutral-900">
+          <h1 className="text-4xl md:text-5xl font-serif mb-6 text-stone-800 leading-snug">
             {product.title}
           </h1>
-          <p className="text-neutral-700 mb-8 leading-relaxed text-lg">
+          <p className="text-stone-600 mb-8 leading-relaxed text-lg">
             {product.description}
           </p>
-          <span className="text-3xl font-semibold text-green-700 mb-8">
+          <span className="text-3xl font-bold text-amber-800 mb-10 block">
             ${product.price}
           </span>
 
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-8">
             <button
               onClick={() => handleQuantityChange(quantity - 1)}
-              className="px-3 py-1 bg-beige rounded hover:bg-green-200 transition"
+              className="w-10 h-10 flex items-center justify-center bg-stone-200 rounded-full hover:bg-stone-300 transition text-xl"
             >
-              -
+              −
             </button>
             <input
               type="number"
               min="1"
               value={quantity}
               onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
-              className="w-16 text-center border border-neutral-300 rounded"
+              className="w-16 text-center border border-stone-300 rounded-md py-1"
             />
             <button
               onClick={() => handleQuantityChange(quantity + 1)}
-              className="px-3 py-1 bg-beige rounded hover:bg-green-200 transition"
+              className="w-10 h-10 flex items-center justify-center bg-stone-200 rounded-full hover:bg-stone-300 transition text-xl"
             >
               +
             </button>
@@ -86,18 +104,29 @@ function ProductDetailPage() {
 
           <div className="flex flex-col gap-4">
             <button
-              onClick={() => addToCart(product, quantity)}
-              className="bg-sage text-white px-6 py-3 rounded-lg hover:bg-sage-700 transition font-medium w-fit"
+              onClick={handleAddToCart}
+              disabled={adding}
+              className={`px-6 py-3 rounded-lg font-medium w-fit transition ${
+                adding
+                  ? "bg-stone-300 text-stone-500 cursor-not-allowed"
+                  : "bg-amber-900 text-rose-100 hover:bg-amber-800"
+              }`}
             >
-              Add {quantity} to Cart
+              {adding ? "Adding..." : `Add ${quantity} to Cart`}
             </button>
             <Link
               to="/"
-              className="text-sm text-green-700 hover:underline w-fit"
+              className="text-sm text-stone-500 hover:text-amber-800 hover:underline w-fit"
             >
               ← Back to Products
             </Link>
           </div>
+          <Toaster
+            position="bottom-center"
+            toastOptions={{
+              duration: 1500,
+            }}
+          />
         </div>
       </div>
     </div>

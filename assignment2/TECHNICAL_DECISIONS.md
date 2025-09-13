@@ -82,11 +82,10 @@ This document outlines the technical decisions and assumptions made during the i
   - API errors or fetch failures
 
 - **Justification:**
-  - Avoids duplication of loading/error UI across multiple pages.
-  - Ensures **consistent styling** and **branding** (fonts, colors, spacing) across the app.
-  - Simplifies maintenance: changing style, font, or animation in one place updates all relevant pages.
-  - Makes it easy to **swap icons** for different states (e.g., frown icon for empty cart, warning triangle for API error).
-  - Aligns with **component-based design principles** in React.
+  - Reusability: Instead of duplicating loading/error/empty-state UI across multiple pages, a single component can be configured via props (loading, icon, title, description, callToAction).
+  - Consistency: Ensures consistent styling across the application for all transient states.
+  - Flexibility: Supports a callToAction prop for actionable links/buttons (e.g., “Start Shopping” from empty cart).
+  - SPA-Friendly Navigation: Used React Router <Link> instead of <a> to prevent full page reloads and maintain smooth client-side navigation.
 
 ### 6. User Feedback on Actions
 
@@ -97,8 +96,6 @@ This document outlines the technical decisions and assumptions made during the i
   - Offers built-in accessibility (screen-reader support) and theming options that fit well with the UI.
 - **Assumption:** Using a popular, well-documented library like `react-hot-toast` will be acceptable since it balances UX benefits with minimal overhead.
 
----
-
 ### 7. Preventing Duplicate Cart Entries
 
 - **Choice:** Introduced an `adding` state (`useState`) for the "Add to Cart" button.
@@ -107,3 +104,18 @@ This document outlines the technical decisions and assumptions made during the i
   - Improves UX by disabling the button briefly and providing real-time feedback (`Adding...` state).
   - Keeps logic simple and contained within the component — no need for external state management here.
 - **Technical Note:** Used `setTimeout` to re-enable the button after a short delay (500ms). This ensures a balance between responsiveness and safety.
+
+### 8. NumberSelector Component
+
+- **Decision:** Created a reusable `NumberSelector` component for selecting the quantity of products.
+- **Reasoning:**
+  - **Reusability:** Quantity selection is required in both the **Product Details** page and the **Cart Page**. Creating a single component prevents duplication of code and ensures consistent behavior and styling.
+  - **User Experience:** Provides a clear and intuitive interface for users to increment, decrement, or directly type in the desired quantity.
+  - **Consistency:** Ensures consistent styling (buttons, input field) and interactions (min/max constraints, validation) across the app.
+- **Implementation Choices:**
+  - Accepts `value` and `onChange` props for controlled behavior.
+  - Includes increment (`+`) and decrement (`-`) buttons alongside a numeric input.
+  - Validates input to prevent values less than 1.
+- **Assumptions:**
+  - Quantities cannot be negative or zero.
+  - Users may either type a number directly or use buttons to adjust quantity.

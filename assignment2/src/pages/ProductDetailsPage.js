@@ -4,6 +4,7 @@ import { CartContext } from "../contexts/CartContext";
 import MessageScreen from "../components/MessageScreen";
 import { StarIcon } from "@heroicons/react/24/solid";
 import toast, { Toaster } from "react-hot-toast";
+import NumberSelector from "../components/NumberSelector";
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -114,25 +115,7 @@ function ProductDetailPage() {
           </span>
 
           <div className="flex items-center gap-3 mb-8">
-            <button
-              onClick={() => handleQuantityChange(quantity - 1)}
-              className="w-10 h-10 flex items-center justify-center bg-stone-200 rounded-full hover:bg-stone-300 transition text-xl"
-            >
-              −
-            </button>
-            <input
-              type="number"
-              min="1"
-              value={quantity}
-              onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
-              className="w-16 text-center border border-stone-300 rounded-md py-1"
-            />
-            <button
-              onClick={() => handleQuantityChange(quantity + 1)}
-              className="w-10 h-10 flex items-center justify-center bg-stone-200 rounded-full hover:bg-stone-300 transition text-xl"
-            >
-              +
-            </button>
+            <NumberSelector value={quantity} onChange={handleQuantityChange} />
           </div>
 
           <div className="flex flex-col gap-3">

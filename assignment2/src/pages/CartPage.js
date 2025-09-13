@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
-import { Link } from "react-router-dom";
 import { FaceFrownIcon } from "@heroicons/react/24/solid";
 import MessageScreen from "../components/MessageScreen";
+import NumberSelector from "../components/NumberSelector";
 
 function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } =
@@ -20,11 +20,8 @@ function CartPage() {
           icon={<FaceFrownIcon className="w-20 h-20 mx-auto text-stone-500" />}
           title="Your cart is empty"
           description="Looks like you haven't made your choice yet!"
+          callToAction={{ label: "Start Shopping", link: "/" }}
         />
-
-        <Link to="/" className="text-sage hover:underline text-lg">
-          ← Back to Products
-        </Link>
       </div>
     );
   }
@@ -48,27 +45,10 @@ function CartPage() {
               <span className="text-neutral-700">${item.price}</span>
             </div>
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                className="px-2 py-1 bg-beige rounded hover:bg-[#dcd3c6]"
-              >
-                -
-              </button>
-              <input
-                type="number"
+              <NumberSelector
                 value={item.quantity}
-                min="1"
-                onChange={(e) =>
-                  updateQuantity(item.id, parseInt(e.target.value))
-                }
-                className="w-12 text-center border rounded"
+                onChange={(newQty) => updateQuantity(item.id, newQty)}
               />
-              <button
-                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                className="px-2 py-1 bg-beige rounded hover:bg-[#dcd3c6]"
-              >
-                +
-              </button>
             </div>
             <button
               onClick={() => removeFromCart(item.id)}
@@ -80,9 +60,10 @@ function CartPage() {
         ))}
 
         <div className="text-right mt-6">
-          <p className="text-xl font-semibold mb-2">
+          <p className="text-3xl font-bold text-amber-800 mb-2">
             Total: ${totalAmount.toFixed(2)}
           </p>
+
           <button
             onClick={clearCart}
             className="bg-beige px-6 py-3 rounded hover:bg-[#dcd3c6] transition"

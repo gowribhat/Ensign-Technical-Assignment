@@ -9,10 +9,15 @@ function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } =
     useContext(CartContext);
 
-  const totalAmount = cartItems.reduce(
+  const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const deliveryFee = subtotal > 100 ? 0 : 5.99; // free delivery over $100
+  const taxRate = 0.09; // 9% GST assumption
+  const tax = subtotal * taxRate;
+  const totalAmount = subtotal + deliveryFee + tax;
 
   if (cartItems.length === 0) {
     return (
@@ -98,7 +103,7 @@ function CartPage() {
             {cartItems.map((item, idx) => (
               <div
                 key={item.id}
-                className={`grid grid-cols-[2fr_1fr_1fr] items-center p-2  ${
+                className={`grid grid-cols-[2fr_1fr_1fr] items-center p-2 ${
                   idx % 2 === 0 ? "bg-stone-200" : "bg-stone-100"
                 }`}
               >
@@ -113,22 +118,45 @@ function CartPage() {
             ))}
           </div>
 
-          <div className="border-t border-stone-300 pt-4 mb-4">
-            <div className="flex justify-between text-lg font-bold text-amber-800 mb-4">
+          <div className="space-y-2 border-t border-stone-300 pt-4 mb-4 text-sm text-neutral-600">
+            <div className="flex justify-between">
+              <span>Subtotal</span>
+              <span>${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>GST (9%)</span>
+              <span>${tax.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Delivery</span>
+              <span>
+                {deliveryFee === 0 ? (
+                  <span className="flex flex-col items-end">
+                    <span className="line-through text-red-500">
+                      ${(5.99).toFixed(2)}
+                    </span>
+                    <span className="text-green-600 font-semibold">FREE</span>
+                  </span>
+                ) : (
+                  `$${deliveryFee.toFixed(2)}`
+                )}
+              </span>
+            </div>
+            <div className="flex justify-between text-lg font-bold text-amber-800 border-t border-stone-200 pt-2">
               <span>Total</span>
               <span>${totalAmount.toFixed(2)}</span>
             </div>
-
-            <button className="w-full bg-amber-900 text-rose-100 py-3 rounded-lg font-semibold hover:bg-amber-800 transition mb-2">
-              Proceed to Checkout
-            </button>
-            <button
-              onClick={clearCart}
-              className="w-full bg-stone-200 text-neutral-700 py-3 rounded-lg font-medium hover:bg-stone-300 transition"
-            >
-              Clear Cart
-            </button>
           </div>
+
+          <button className="w-full bg-amber-900 text-rose-100 py-3 rounded-lg font-semibold hover:bg-amber-800 transition mb-2">
+            Proceed to Checkout
+          </button>
+          <button
+            onClick={clearCart}
+            className="w-full bg-stone-200 text-neutral-700 py-3 rounded-lg font-medium hover:bg-stone-300 transition"
+          >
+            Clear Cart
+          </button>
         </div>
       </div>
     </div>

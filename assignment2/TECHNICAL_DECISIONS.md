@@ -94,6 +94,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Provides a lightweight, dependency-free, and highly customizable toast system.
   - Allows quick, non-intrusive feedback without requiring custom modal or alert implementations.
   - Offers built-in accessibility (screen-reader support) and theming options that fit well with the UI.
+  - Centralizing toast logic in the `CartContext` ensures **all cart-related actions** (add, remove, update, clear) automatically trigger user feedback, reducing code duplication across pages.
 - **Assumption:** Using a popular, well-documented library like `react-hot-toast` will be acceptable since it balances UX benefits with minimal overhead.
 
 ### 7. Preventing Duplicate Cart Entries

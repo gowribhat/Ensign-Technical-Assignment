@@ -1,4 +1,6 @@
 import { createContext, useState, useEffect } from "react";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import toast from "react-hot-toast";
 
 export const CartContext = createContext();
 
@@ -16,7 +18,6 @@ export function CartProvider({ children }) {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
-        // Update quantity if product already exists
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
@@ -26,21 +27,39 @@ export function CartProvider({ children }) {
         return [...prev, { ...product, quantity }];
       }
     });
+
+    toast.success(`${quantity} × "${product.title}" added to cart`);
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== productId));
+  const removeFromCart = (id) => {
+    const item = cartItems.find((i) => i.id === id);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    if (item) toast(`Removed "${item.title}" from cart`);
   };
 
-  const updateQuantity = (productId, quantity) => {
-    if (quantity < 1) return; // prevent zero or negative
+  const updateQuantity = (id, newQuantity) => {
     setCartItems((prev) =>
-      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
     );
+    const item = cartItems.find((i) => i.id === id);
+    if (item)
+      toast.success(`Updated "${item.title}" quantity to ${newQuantity}`);
   };
 
   const clearCart = () => {
     setCartItems([]);
+    toast.custom((t) => (
+      <div
+        className={`${
+          t.visible ? "animate-slideIn" : "animate-slideOut"
+        } flex items-center gap-3 bg-red-600 text-white px-5 py-3 rounded-lg shadow-lg`}
+      >
+        <TrashIcon className="h-6 w-6 animate-pulse" />
+        <span className="font-medium">Cart cleared!</span>
+      </div>
+    ));
   };
 
   return (

@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import MessageScreen from "../components/MessageScreen";
 import { StarIcon } from "@heroicons/react/24/solid";
-import toast, { Toaster } from "react-hot-toast";
 import NumberSelector from "../components/NumberSelector";
 
 function ProductDetailPage() {
@@ -41,8 +40,6 @@ function ProductDetailPage() {
     setAdding(true);
     addToCart(product, quantity);
     setQuantity(1);
-    toast.success(`${quantity} × ${product.title} added to cart`);
-
     setTimeout(() => setAdding(false), 1000);
   };
 
@@ -61,12 +58,6 @@ function ProductDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
-      <Toaster
-        position="bottom-center"
-        toastOptions={{
-          duration: 1000,
-        }}
-      />
       <div className="flex flex-col md:flex-row gap-12">
         <div className="flex-1 flex items-start justify-center">
           <img

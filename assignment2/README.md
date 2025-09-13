@@ -1,106 +1,76 @@
-# Ensign Technical Assignment 2 - Shopping Site
+# Olive & Oak — Shopping Cart (Assignment 2)
 
-## Project Overview
-
-This is the initial setup for a shopping site web application built using React.js and TailwindCSS.
+This repo contains **Assignment 2** — a small shopping-cart React app.
 
 ---
 
-## Project Setup & Run Instructions
+## Features
+
+- [x] Product listing page (retrieves items from https://fakestoreapi.com)
+- [x] Product detail page with quantity selector and add to cart
+- [x] Global cart with:
+  - [x] Add / update / remove products
+  - [x] Item count displayed on navbar
+  - [x] Persistent state via localStorage
+- [x] Cart page with:
+  - [x] Table-style product list
+  - [x] Order summary card (subtotal, tax, delivery fee, total)
+- [x] Responsive UI styled with Tailwind CSS
+- [x] User feedback via toast notifications (react-hot-toast)
+
+---
+
+## Tech stack
+
+- React (Create React App)
+- React Router
+- Tailwind CSS
+- Heroicons
+- react-hot-toast
+- Browser `localStorage` for cart persistence
+
+## Getting started
+
+### Prerequisites
+
+- Node.js (v16+ recommended)
+- npm (v8+)
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/gowribhat/Ensign-Technical-Assignment.git
-cd assignment2
 ```
 
 ### 2. Install Dependencies
 
 ```bash
+cd assignment2
 npm install
 ```
 
 ### 3. Start Development Server
 
 ```bash
-npm start
+npm run start
 ```
 
-Open http://localhost:3000 to view the site.
+- Open http://localhost:3000 to view the site.
+- The page will reload when you make changes.
 
-The page will reload when you make changes.
+### 3. Build React App
 
----
+Create a `build` folder with optimized production assets for deployment.
 
-## Available Scripts
+```bash
+npm run build
+```
 
-In the project directory, you can run:
+### 4. Install Server and Deploy
 
-### `npm start`
+```bash
+npm install -g serve
+serve -s build
+```
 
-Runs the app in the development mode.\
-Open http://localhost:3000 to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
----
-
-<details>
-<summary> Learn More </summary>
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-</details>
+This will start a local server, usually on http://localhost:3000 or a similar port, allowing you to view and test your production build in a local environment.

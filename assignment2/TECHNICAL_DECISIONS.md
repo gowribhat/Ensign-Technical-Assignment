@@ -6,46 +6,49 @@ This document outlines the technical decisions and assumptions made during the i
 
 ### 1. Tooling
 
-- **Choice:** Create React App (CRA)
-- **Reasoning:** CRA was chosen over alternatives like Vite because:
-  - Provides a well-known, stable, and widely used setup.
-  - Offers zero-configuration setup suitable for beginners and small-medium projects.
-  - Comes with built-in scripts for testing, building, and running the project.
-  - Easier to follow CRA documentation and support for Create React App aligns with the assignment’s context.
-- **Assumption:** The project is small enough that CRA’s slightly heavier build time is acceptable.
+- **Choice:** Create React App (CRA) + Tailwind CSS
+- **Reasoning:**
+  - The assignment explicitly requires React. CRA was selected because it provides a stable, beginner-friendly boilerplate with minimal setup.
+  - Alternatives like Vite were considered, but CRA offers:
+    - Mature documentation and wide community support.
+    - Built-in scripts for testing, linting, building, and deployment.
+    - Simplicity, suitable for a small-to-medium project like this.
+  - Tailwind CSS was added (bonus requirement) to beautify the UI, enabling rapid styling with responsive utilities and consistent spacing/typography.
+- **Assumptions:**
+  - The small scope of the project makes CRA's slower build times acceptable.
+  - Since no backend is needed, CRA's static build output is sufficient for deployment.
+
+### 2. Routing & Navigation
+
+- **Choice:** `react-router-dom`
+- **Reasoning:**
+  - The brief requires multiple pages (products listing → product detail → cart).
+  - React Router provides simple client-side navigation with dynamic routes (`/products/:id`).
+- **Assumption:** Client-side routing is sufficient since backend integration is out of scope.
 
 ### 2. Products Listing
 
 - **Data Fetching with `fetch` + `useEffect`**
-
   - Used the built-in `fetch` API instead of Axios to avoid extra dependencies.
-  - `useEffect` ensures the API call runs once on component mount.
-  - Assumes the Fake Store API is reliable and consistent.
-
+  - `useEffect` ensures the API call runs after component has been rendered and mounted to the DOM.
+  - Assumed the API is reliable and returns consistent data.
 - **State Management with `useState`**
-
   - Local state is sufficient since products are only needed in the `ProductsPage`.
-  - Assumes cart state will later require global management (e.g., React Context).
-
 - **Responsive Layout with TailwindCSS Grid**
   - Used Tailwind’s `grid` utilities for responsive product card layout.
   - Assumes grid layout is the natural choice for e-commerce displays.
+  - Product card emphasizes **name + price** (most important) with minimal description, since details are shown on the product page.
 
 ### 3. Product Details Page
 
-- **Routing with React Router**
-
-  - `react-router-dom` used for navigation.
+- **Data Fetching with `fetch` + `useEffect`**
   - Dynamic route `/products/:id` to fetch individual product details.
   - `useParams` hook allows retrieval of product ID.
-
-- **Product Layout**
-
+- **Layout**
   - Full-page layout to provide focus on product details.
   - Responsive two-column layout (`flex-col md:flex-row`) for image and details.
   - Typography hierarchy with clear title, description, price for readability.
-
-- **Quantity Selector**
+- **Number Selector**
   - Numeric input with increment/decrement buttons implemented using `useState`.
   - Prevents quantity below 1 or non positive integer values.
   - Button label dynamically updates to reflect chosen quantity.
@@ -54,38 +57,32 @@ This document outlines the technical decisions and assumptions made during the i
 ### 4. Shopping Cart
 
 - **Global State Management with React Context**
-
   - Created a `CartContext` to manage cart items globally.
-  - Provides functions to add, remove, update quantity, and clear cart.
-  - Chose Context + `useState` over Redux due to the small scale of the application.
-  - This avoids prop drilling and keeps cart accessible across pages.
-
-- **Persistence with LocalStorage**
-
-  - Cart data is saved in `localStorage` whenever items are added, removed, or quantities updated.
-  - On app load, cart initializes from `localStorage` if present.
-  - Justification: Provides persistence across browser reloads and closures without needing a backend.
-
+  - Provides `addToCart`, `removeFromCart`, `updateQuantity`, and `clearCart`.
+  - Chose React Context + `useState` over Redux for simplicity (small scope).
+  - This avoids prop drilling and keeps cart accessible across the entire application.
+- **Data Persistence with LocalStorage**
+  - Cart saved to `localStorage` on every update.
+  - Initializes from `localStorage` on app load.
+  - Provides persistence across browser reloads and closures without needing a backend.
 - **Cart Page Layout**
-  - Lists all products added to the cart with image, title, price, quantity selector, and remove button.
-  - Quantity selector allows increment/decrement and manual entry (prevents zero or negative values).
-  - Displays total amount dynamically.
-  - Includes "Clear Cart" button for convenience.
-  - Responsive design using TailwindCSS (`flex-col md:flex-row` for each item).
+  - Each item displays image, title, price, quantity, and remove button.
+  - Includes "Clear Cart" option for convenience.
+  - Shows **total amount** dynamically.
+  - Responsive: stacked on mobile, side-by-side on desktop.
+- **Sticky Order Summary**
+  - On large screens, summary is `sticky` (`lg:sticky lg:top-24`), keeping summary visible during scroll.
+  - On small screens, summary stacks below for usability.
 
 ### 5. MessageScreen Component
 
-- **Decision:** Created a single `MessageScreen` component to handle all **intermediate page states**, including:
-
-  - Loading (`Spinner`)
-  - Empty data (e.g., empty cart, no search results)
-  - API errors or fetch failures
-
-- **Justification:**
-  - Reusability: Instead of duplicating loading/error/empty-state UI across multiple pages, a single component can be configured via props (loading, icon, title, description, callToAction).
-  - Consistency: Ensures consistent styling across the application for all transient states.
-  - Flexibility: Supports a callToAction prop for actionable links/buttons (e.g., “Start Shopping” from empty cart).
+- **Purpose:** Centralized handling of loading, empty, and error states.
+- **Reasoning:**
+  - Reusable across products, product details, and cart.
+  - Ensures consistent UI and avoids repeating spinners/messages.
+  - Supports optional call-to-action buttons (e.g., "Start Shopping").
   - SPA-Friendly Navigation: Used React Router <Link> instead of <a> to prevent full page reloads and maintain smooth client-side navigation.
+- **Implementation:** Configurable via props (`loading`, `title`, `description`, `callToAction`).
 
 ### 6. User Feedback on Actions
 
@@ -94,7 +91,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Provides a lightweight, dependency-free, and highly customizable toast system.
   - Allows quick, non-intrusive feedback without requiring custom modal or alert implementations.
   - Offers built-in accessibility (screen-reader support) and theming options that fit well with the UI.
-  - Centralizing toast logic in the `CartContext` ensures **all cart-related actions** (add, remove, update, clear) automatically trigger user feedback, reducing code duplication across pages.
+  - Centralizing toast logic in the `CartContext` ensures **all cart-related actions** (add, remove, clear) automatically trigger user feedback, reducing code duplication across pages.
 - **Assumption:** Using a popular, well-documented library like `react-hot-toast` will be acceptable since it balances UX benefits with minimal overhead.
 
 ### 7. Preventing Duplicate Cart Entries
@@ -104,26 +101,22 @@ This document outlines the technical decisions and assumptions made during the i
   - Prevents accidental multiple submissions if a user double-clicks quickly.
   - Improves UX by disabling the button briefly and providing real-time feedback (`Adding...` state).
   - Keeps logic simple and contained within the component — no need for external state management here.
-- **Technical Note:** Used `setTimeout` to re-enable the button after a short delay (500ms). This ensures a balance between responsiveness and safety.
+- **Technical Note:** Used `setTimeout` to re-enable the button after a short delay. This ensures a balance between responsiveness and safety.
+- **Assumption:** The short delay does not hamper the user flow.
 
 ### 8. NumberSelector Component
 
-- **Decision:** Created a reusable `NumberSelector` component for selecting the quantity of products.
-- **Reasoning:**
-  - **Reusability:** Quantity selection is required in both the **Product Details** page and the **Cart Page**. Creating a single component prevents duplication of code and ensures consistent behavior and styling.
-  - **User Experience:** Provides a clear and intuitive interface for users to increment, decrement, or directly type in the desired quantity.
-  - **Consistency:** Ensures consistent styling (buttons, input field) and interactions (min/max constraints, validation) across the app.
-- **Implementation Choices:**
-  - Accepts `value` and `onChange` props for controlled behavior.
-  - Includes increment (`+`) and decrement (`-`) buttons alongside a numeric input.
-  - Validates input to prevent values less than 1.
+- **Reusability:** Used on both product detail page and cart page.
+- **Validation:** Enforces minimum value of 1 and checks for valid values.
+- **Props:** Accepts `value` and `onChange` for controlled usage.
+- **Justification:** Avoids duplicate code and keeps quantity interactions consistent across the app.
 - **Assumptions:**
   - Quantities cannot be negative or zero.
   - Users may either type a number directly or use buttons to adjust quantity.
 
 ### 9. Linking Cart Items to Product Details
 
-- **Decision:** Make each product in the cart clickable, linking to its respective product details page (`/products/:id`).
+- **Choice:** Make each product in the cart clickable, linking to its respective product details page (`/products/:id`).
 - **Reasoning:**
   - **User Experience:** Allows users to quickly revisit product details, check specifications, or adjust quantity before purchasing.
   - **Consistency:** Mirrors common e-commerce behavior where cart items are interactive.
@@ -135,21 +128,18 @@ This document outlines the technical decisions and assumptions made during the i
 
 ### 10. Cart Page – Sticky Order Summary
 
-**Implementation:**
+- **Choice:** The order summary on the right uses `lg:sticky lg:top-24 h-fit` (Tailwind).
 
-- The order summary on the right uses `lg:sticky lg:top-24 h-fit` (Tailwind).
   - `sticky` keeps it visible while scrolling within its container.
   - `top-24` offsets it from the top to avoid overlapping headers.
   - `h-fit` adapts height to content.
-- Sticky behavior is **applied only on large screens** (`lg:`) for responsiveness; on smaller screens, the layout stacks naturally.
+  - Sticky behavior is **applied only on large screens** (`lg:`) for responsiveness; on smaller screens, the layout stacks naturally.
 
-**Rationale:**
-
-- Keeps critical purchase information (totals, checkout actions) visible to improve usability and encourage conversions.
-- Mirrors familiar e-commerce patterns, enhancing user trust and experience.
-- Tailwind CSS sticky implementation avoids extra JS scroll handling, simplifying code.
-
-**Assumptions:**
-
-- Cart content may vary in length; height adapts dynamically.
-- Mobile users benefit from stacked layout rather than sticky elements to prevent overlap or cramped views.
+- **Rationale:**
+  - Keeps critical purchase information (totals, checkout actions) visible to improve usability and encourage conversions.
+  - Mirrors familiar e-commerce patterns, enhancing user trust and experience.
+  - Tailwind CSS sticky implementation avoids extra JS scroll handling, simplifying code.
+- **Assumptions:**
+  - Cart content may vary in length; height adapts dynamically.
+  - Mobile users benefit from stacked layout rather than sticky elements to prevent overlap or cramped views.
+  - Users prefer a receipt-like order summary.

@@ -63,6 +63,7 @@ function CartPage() {
           <div className="flex justify-end">
             <button
               onClick={clearCart}
+              aria-label="Clear Cart"
               className="text-neutral-700 hover:text-stone-800 transition flex items-center gap-1"
             >
               <TrashIcon className="h-5 w-5" />
@@ -70,7 +71,10 @@ function CartPage() {
             </button>
           </div>
           {cartItems.map((item) => (
-            <div className="grid grid-cols-[80px_1fr_100px_80px] items-center gap-10 p-4 rounded-md transition">
+            <div
+              key={item.id}
+              className="grid grid-cols-[80px_1fr_100px_80px] items-center gap-10 p-4 rounded-md transition"
+            >
               <Link
                 to={`/products/${item.id}`}
                 className="flex overflow-hidden"
@@ -93,6 +97,7 @@ function CartPage() {
                 <NumberSelector
                   value={item.quantity}
                   onChange={(newQty) => updateQuantity(item.id, newQty)}
+                  data-testid={item.id}
                 />
               </div>
 
@@ -110,7 +115,6 @@ function CartPage() {
         </div>
 
         <div className="lg:w-96 h-fit lg:sticky lg:top-24 flex flex-col gap-4">
-          {/* Receipt Card */}
           <div className="bg-stone-50 p-6">
             <h3 className="text-2xl font-semibold mb-4 border-b border-stone-300 pb-2">
               Order Summary
@@ -128,7 +132,10 @@ function CartPage() {
                   <span className="text-center text-sm text-neutral-700">
                     {item.quantity}
                   </span>
-                  <span className="text-right text-sm font-medium text-neutral-900">
+                  <span
+                    data-testid="product-subtotal"
+                    className="text-right text-sm font-medium text-neutral-900"
+                  >
                     ${(item.price * item.quantity).toFixed(2)}
                   </span>
                 </div>
@@ -138,15 +145,15 @@ function CartPage() {
             <div className="space-y-2 text-sm text-neutral-600 border-t border-stone-300 pt-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span data-testid="subtotal">${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>GST (9%)</span>
-                <span>${tax.toFixed(2)}</span>
+                <span data-testid="tax">${tax.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Delivery Fee</span>
-                <span>
+                <span data-testid="delivery-fee">
                   {deliveryFee === 0 ? (
                     <span className="flex flex-col items-end">
                       <span className="line-through text-red-500">
@@ -161,22 +168,18 @@ function CartPage() {
               </div>
               <div className="flex justify-between text-lg font-bold text-amber-800 border-t border-stone-200 pt-2">
                 <span>Total</span>
-                <span>${totalAmount.toFixed(2)}</span>
+                <span data-testid="total">${totalAmount.toFixed(2)}</span>
               </div>
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-col gap-2">
-            <button className="w-full bg-amber-900 text-rose-100 py-4 rounded-lg font-bold hover:bg-amber-800 shadow-lg transition text-lg flex items-center justify-center gap-2">
+            <button
+              aria-label="Proceed to Checkout"
+              className="w-full bg-amber-900 text-rose-100 py-4 rounded-lg font-bold hover:bg-amber-800 shadow-lg transition text-lg flex items-center justify-center gap-2"
+            >
               <CreditCardIcon className="h-6 w-6" />
               Proceed to Checkout
-            </button>
-            <button
-              onClick={clearCart}
-              className="w-full bg-stone-200 text-neutral-700 py-3 rounded-lg font-medium hover:bg-stone-300 transition"
-            >
-              Clear Cart
             </button>
           </div>
         </div>

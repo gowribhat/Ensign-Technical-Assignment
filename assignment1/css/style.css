@@ -69,6 +69,16 @@ body {
   border-radius: 50%;
 }
 
+.user span {
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .user span {
+    display: none;
+  }
+}
+
 /* Board Layout */
 .board {
   display: grid;

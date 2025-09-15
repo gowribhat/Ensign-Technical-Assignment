@@ -13,14 +13,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-/* For modern browsers (Chrome, Edge, Safari) */
-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* For Firefox */
-body {
-  scrollbar-width: none; /* hides scrollbar but still scrollable */
-  -ms-overflow-style: none; /* for IE 10+ */
-}

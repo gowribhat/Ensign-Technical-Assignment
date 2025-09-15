@@ -5,6 +5,7 @@ import {
   FaceFrownIcon,
   TrashIcon,
   CreditCardIcon,
+  ChevronLeftIcon,
 } from "@heroicons/react/24/solid";
 import MessageScreen from "../components/MessageScreen";
 import NumberSelector from "../components/NumberSelector";
@@ -38,6 +39,13 @@ function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
+      <Link
+        to="/"
+        className="mb-8 inline-flex items-center gap-2 text-amber-800 hover:text-stone-600 transition w-fit text-base"
+      >
+        <ChevronLeftIcon className="h-5 w-5" />
+        <span className="font-medium">Back to Products</span>
+      </Link>
       <h2 className="text-4xl md:text-5xl font-serif text-amber-900 mb-6 flex items-center gap-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"

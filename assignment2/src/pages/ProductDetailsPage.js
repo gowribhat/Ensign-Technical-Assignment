@@ -68,7 +68,7 @@ function ProductDetailPage() {
         </div>
 
         <div className="flex-1 flex flex-col justify-start">
-          <h1 className="text-4xl md:text-5xl font-serif mb-2 text-stone-800 leading-snug">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2 text-stone-800 leading-snug">
             {product.title}
           </h1>
 
@@ -76,7 +76,7 @@ function ProductDetailPage() {
             {product.category}
           </span>
 
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-2">
             {Array.from({ length: 5 }, (_, i) => (
               <StarIcon
                 key={i}
@@ -97,15 +97,15 @@ function ProductDetailPage() {
             )}
           </div>
 
-          <p className="text-stone-600 mb-8 leading-relaxed text-lg">
+          <p className="text-stone-600 mb-6 leading-relaxed text-lg">
             {product.description}
           </p>
 
-          <span className="text-3xl font-bold text-amber-800 mb-10 block">
+          <span className="text-3xl font-bold text-amber-800 mb-6 block">
             ${product.price}
           </span>
 
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-3 mb-6">
             <NumberSelector value={quantity} onChange={setQuantity} />
           </div>
 

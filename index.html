@@ -1,1 +1,146 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/Ensign-Technical-Assignment/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/Ensign-Technical-Assignment/logo192.png"/><link rel="manifest" href="/Ensign-Technical-Assignment/manifest.json"/><title>React App</title><script defer="defer" src="/Ensign-Technical-Assignment/static/js/main.9ca13b49.js"></script><link href="/Ensign-Technical-Assignment/static/css/main.e4a47c2f.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Assignment 1</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+
+    <body>
+        <header class="site-header">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Boardly Logo" />
+                <span class="app-name">Boardly</span>
+            </div>
+            <input type="text" class="search" placeholder="Search tasks..." />
+            <div class="user">
+                <img src="assets/avatar.jpg" alt="User Avatar" class="avatar" />
+                <span>Jane Doe</span>
+            </div>
+        </header>
+
+        <main class="board">
+            <section class="column">
+                <h2>Backlog</h2>
+
+                <article class="card">
+                    <h3>Research authentication options</h3>
+                    <p>
+                        Evaluate OAuth 2.0 vs JWT for upcoming user login
+                        system.
+                    </p>
+                    <div class="meta">
+                        <span class="badge blue">Alex</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Design product landing page</h3>
+                    <p>
+                        Create initial wireframes and UI mockups for the new
+                        marketing site.
+                    </p>
+                    <div class="meta">
+                        <span class="badge purple">Mel</span>
+                        <span class="date red">2 days ago</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Write API documentation</h3>
+                    <p>
+                        Draft developer docs for v2 endpoints: products, orders,
+                        and users.
+                    </p>
+                    <div class="meta">
+                        <span class="badge teal">Leo</span>
+                    </div>
+                </article>
+            </section>
+
+            <section class="column">
+                <h2>Todo</h2>
+
+                <article class="card">
+                    <h3>Implement cart service</h3>
+                    <p>
+                        Build shopping cart module and connect it to checkout
+                        flow.
+                    </p>
+                    <div class="meta">
+                        <span class="badge purple">Mel</span>
+                        <span class="date green">Today</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Database migration for orders</h3>
+                    <p>
+                        Migrate old orders table to the new schema with foreign
+                        keys.
+                    </p>
+                    <div class="meta">
+                        <span class="badge blue">Alex</span>
+                        <span class="date green">In 3 days</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>QA testing: product detail page</h3>
+                    <p>
+                        Verify product descriptions, images, and prices are
+                        loading correctly.
+                    </p>
+                    <div class="meta">
+                        <span class="badge purple">Mel</span>
+                        <span class="date">July 21</span>
+                    </div>
+                </article>
+            </section>
+
+            <section class="column">
+                <h2>Done</h2>
+
+                <article class="card">
+                    <h3>Set up CI/CD pipeline</h3>
+                    <p>
+                        Configured GitHub Actions for automated testing and
+                        deployment.
+                    </p>
+                    <div class="meta">
+                        <span class="badge purple">Mel</span>
+                        <span class="date">A week ago</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Fix checkout bug</h3>
+                    <p>
+                        Resolved payment failure issue caused by Stripe API
+                        update.
+                    </p>
+                    <div class="meta">
+                        <span class="badge blue">Alex</span>
+                        <span class="date">Last Tuesday</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Update readme and setup guide</h3>
+                    <p>
+                        Added installation steps, dependencies, and contribution
+                        guidelines.
+                    </p>
+                    <div class="meta">
+                        <span class="badge purple">Mel</span>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </body>
+</html>

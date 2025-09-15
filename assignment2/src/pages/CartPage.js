@@ -98,7 +98,9 @@ function CartPage() {
 
               <Link to={`/products/${item.id}`} className="overflow-hidden">
                 <h3 className="font-playfair text-lg truncate">{item.title}</h3>
-                <span className="text-neutral-700">${item.price}</span>
+                <span className="text-neutral-700">
+                  ${item.price.toFixed(2)}
+                </span>
               </Link>
 
               <div className="flex justify-center">

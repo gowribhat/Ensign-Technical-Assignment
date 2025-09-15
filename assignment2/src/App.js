@@ -5,6 +5,7 @@ import CartPage from "./pages/CartPage";
 import Navbar from "./components/Navbar";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailsPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         </header>
         <main className="flex-1 flex items-center justify-center">
           <Toaster position="bottom-left" toastOptions={{ duration: 1500 }} />
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<ProductsPage />} />
             <Route path="/products/:id" element={<ProductDetailPage />} />

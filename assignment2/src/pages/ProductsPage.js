@@ -60,7 +60,7 @@ function ProductsPage() {
                 {product.title}
               </h2>
               <div className="mt-auto text-lg font-semibold text-green-700">
-                ${product.price}
+                ${product.price.toFixed(2)}
               </div>
             </Link>
           ))}

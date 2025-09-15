@@ -2,6 +2,8 @@
 
 This repo contains **Assignment 2** — a small shopping-cart React app.
 
+Live site: [https://gowribhat.github.io/Ensign-Technical-Assignment/#/](https://gowribhat.github.io/Ensign-Technical-Assignment/#/)
+
 ## Features
 
 - [x] Product listing page (retrieves items from [FakeStoreAPI](https://fakestoreapi.com))

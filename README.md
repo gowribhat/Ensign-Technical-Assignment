@@ -46,6 +46,8 @@ Interactive shopping cart application using React, Tailwind CSS, and React Route
 
 [View Technical Decisions →](./assignment2/TECHNICAL_DECISIONS.md)
 
+[Live Site →](https://gowribhat.github.io/Ensign-Technical-Assignment/#/)
+
 ---
 
 ## Getting started
@@ -69,5 +71,3 @@ python3 -m http.server 8000
 ### Assignment 2
 
 Read the instructions in the [Assignment 2 README](./assignment2/README.md).
-
-[Live Demo →](https://gowribhat.github.io/Ensign-Technical-Assignment/#/).

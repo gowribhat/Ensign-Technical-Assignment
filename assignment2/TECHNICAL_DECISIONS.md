@@ -203,7 +203,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Leveraging GitHub Actions and `gh-pages` keeps the workflow simple, reliable, and free of extra infrastructure.
 
 - **Outcome / Benefits:**
-  - Ensures the live app is always up-to-date with the latest changes.
+  - Ensures the [live site](https://gowribhat.github.io/Ensign-Technical-Assignment/#/) is always up-to-date with the latest changes.
   - Automates deployment so fewer manual steps are needed.
   - Confirms the core functionality is working before publishing.
   - Reduces the risk of human error during deployment.

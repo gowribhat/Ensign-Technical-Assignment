@@ -188,8 +188,14 @@ describe("CartPage", () => {
         name: /Clear Cart/i,
       });
       expect(clearCartButton).toBeInTheDocument();
-
       fireEvent.click(clearCartButton);
+
+      expect(screen.getByText(/Clear your cart?/i)).toBeInTheDocument();
+      const confirmButton = screen.getByRole("button", {
+        name: /Yes, clear it/i,
+      });
+      fireEvent.click(confirmButton);
+
       expect(clearCart).toHaveBeenCalled();
     });
   });

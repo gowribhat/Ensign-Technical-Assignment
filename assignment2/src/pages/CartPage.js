@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import {
@@ -9,8 +9,11 @@ import {
 } from "@heroicons/react/24/solid";
 import MessageScreen from "../components/MessageScreen";
 import NumberSelector from "../components/NumberSelector";
+import ConfirmModal from "../components/ConfirmModal";
 
 function CartPage() {
+  const [showConfirm, setShowConfirm] = useState(false);
+
   const { cartItems, removeFromCart, updateQuantity, clearCart } =
     useContext(CartContext);
 
@@ -70,7 +73,7 @@ function CartPage() {
         <div className="flex-1 flex flex-col gap-6">
           <div className="flex justify-end">
             <button
-              onClick={clearCart}
+              onClick={() => setShowConfirm(true)}
               aria-label="Clear Cart"
               className="text-neutral-700 hover:text-stone-800 transition flex items-center gap-1"
             >
@@ -194,6 +197,17 @@ function CartPage() {
           </div>
         </div>
       </div>
+      {showConfirm && (
+        <ConfirmModal
+          title="Clear your cart?"
+          message="This action cannot be undone. Are you sure you want to remove all items from your cart?"
+          onCancel={() => setShowConfirm(false)}
+          onConfirm={() => {
+            clearCart();
+            setShowConfirm(false);
+          }}
+        />
+      )}
     </div>
   );
 }

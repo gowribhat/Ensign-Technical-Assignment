@@ -181,3 +181,29 @@ This document outlines the technical decisions and assumptions made during the i
   - Prevents regressions in core cart functionality.
   - Documents expected behavior in a clear, executable format.
   - Improves confidence that both state and UI interactions behave as intended under different scenarios.
+
+### 12. CI/CD Pipeline
+
+- **Objective:** Demonstrate a professional, automated deployment workflow that ensures the React app is always live in a stable state.
+
+- **Implementation:** GitHub Actions (`deploy.yml`) automates the following steps on every push to `main`:
+
+  - **Checkout code:** Retrieves the latest changes from the repository.
+  - **Set up Node.js environment:** Ensures a consistent Node version across all runs.
+  - **Install dependencies:** `npm ci` installs exact versions from `package-lock.json` for reproducible builds.
+  - **Run tests:** Executes `npm test -- --watchAll=false` to validate core functionality before deployment.
+    - **Why watchAll is false:** We don’t need an interactive watch mode in CI; it ensures tests run once and the workflow completes without hanging.
+  - **Build the app:** Creates an optimized, production-ready bundle using `npm run build`.
+  - **Deploy to GitHub Pages:** Publishes the build to the `gh-pages` branch using `peaceiris/actions-gh-pages@v3`.
+
+- **Technical Decisions & Rationale:**
+
+  - Automating deployment removes manual steps and reduces the chance of mistakes.
+  - Running tests before building guarantees that only working, validated code goes live.
+  - Leveraging GitHub Actions and `gh-pages` keeps the workflow simple, reliable, and free of extra infrastructure.
+
+- **Outcome / Benefits:**
+  - Ensures the live app is always up-to-date with the latest changes.
+  - Automates deployment so fewer manual steps are needed.
+  - Confirms the core functionality is working before publishing.
+  - Reduces the risk of human error during deployment.

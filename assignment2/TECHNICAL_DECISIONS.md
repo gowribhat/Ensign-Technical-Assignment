@@ -129,12 +129,10 @@ This document outlines the technical decisions and assumptions made during the i
 ### 10. Cart Page – Sticky Order Summary
 
 - **Choice:** The order summary on the right uses `lg:sticky lg:top-24 h-fit` (Tailwind).
-
   - `sticky` keeps it visible while scrolling within its container.
   - `top-24` offsets it from the top to avoid overlapping headers.
   - `h-fit` adapts height to content.
   - Sticky behavior is **applied only on large screens** (`lg:`) for responsiveness; on smaller screens, the layout stacks naturally.
-
 - **Rationale:**
   - Keeps critical purchase information (totals, checkout actions) visible to improve usability and encourage conversions.
   - Mirrors familiar e-commerce patterns, enhancing user trust and experience.
@@ -143,3 +141,43 @@ This document outlines the technical decisions and assumptions made during the i
   - Cart content may vary in length; height adapts dynamically.
   - Mobile users benefit from stacked layout rather than sticky elements to prevent overlap or cramped views.
   - Users prefer a receipt-like order summary.
+
+### 11. Testing Strategy & Decisions
+
+- **Framework & Tools:**
+
+  - **React Testing Library (RTL)** for rendering components and simulating user interactions in a way that mirrors real user behavior.
+  - **Jest** as the test runner, leveraging mocking, assertions, and snapshot capabilities where needed.
+
+- **Scope of Tests:**
+
+  - **CartContext:** `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`, localStorage persistence, and toast notifications.
+  - **CartPage:** Rendering of empty cart, cart items, order summary calculations, quantity changes, and remove/clear actions.
+
+- **Helpers & Factories:**
+
+  - `createCartItem` to generate cart items consistently.
+  - `calculateTotals` to compute subtotal, tax, delivery fee, and total, avoiding duplicate calculations in multiple tests.
+  - `renderWithCart` to wrap components in `CartContext.Provider`, simulating realistic state for tests.
+
+- **Test Reliability:**
+
+  - `data-testid` attributes added for interactive elements like quantity inputs and increment/decrement buttons.
+  - Verified elements exist before interacting to prevent false positives or flaky tests.
+  - Mocks used for `react-hot-toast` to isolate toast behavior from actual library implementation.
+
+- **Organization & Readability:**
+
+  - Tests grouped in meaningful `describe` blocks.
+  - Promotes maintainability and allows others to understand which features each test covers.
+
+- **Assumptions & Reasoning:**
+
+  - Jest mocking ensures tests are focused on cart logic without relying on external libraries or APIs.
+  - Network requests (fakestoreapi) are not tested here — assumed to be stable; tests focus on cart logic and UI behavior.
+  - Cart functionality is central to the application, so unit and integration tests prioritize correctness and persistence.
+
+- **Benefits:**
+  - Prevents regressions in core cart functionality.
+  - Documents expected behavior in a clear, executable format.
+  - Improves confidence that both state and UI interactions behave as intended under different scenarios.

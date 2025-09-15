@@ -6,7 +6,7 @@ This repo contains **Assignment 2** — a small shopping-cart React app.
 
 ## Features
 
-- [x] Product listing page (retrieves items from https://fakestoreapi.com)
+- [x] Product listing page (retrieves items from [FakeStoreAPI](https://fakestoreapi.com))
 - [x] Product detail page with quantity selector and add to cart
 - [x] Global cart with:
   - [x] Add / update / remove products
@@ -15,19 +15,21 @@ This repo contains **Assignment 2** — a small shopping-cart React app.
 - [x] Cart page with:
   - [x] Table-style product list
   - [x] Order summary card (subtotal, tax, delivery fee, total)
-- [x] Responsive UI styled with Tailwind CSS
-- [x] User feedback via toast notifications (react-hot-toast)
+- [x] **Responsive UI** styled with Tailwind CSS
+- [x] **User feedback** via toast notifications (`react-hot-toast`)
+- [x] **Bonus:** Cart page tested with Jest + React Testing Library
 
 ---
 
 ## Tech stack
 
-- React (Create React App)
-- React Router
-- Tailwind CSS
-- Heroicons
-- react-hot-toast
-- Browser `localStorage` for cart persistence
+- **React** (Create React App)
+- **React Router** — client-side routing
+- **Tailwind CSS** — utility-first styling
+- **Heroicons** — icons for UI
+- **react-hot-toast** — lightweight toast notifications
+- **localStorage** — cart persistence across reloads
+- **Jest + React Testing Library** — unit & integration tests
 
 ## Getting started
 
@@ -58,7 +60,15 @@ npm run start
 - Open http://localhost:3000 to view the site.
 - The page will reload when you make changes.
 
-### 3. Build React App
+### 4. Run Tests
+
+```bash
+npm test
+```
+
+- Runs Jest tests in watch mode.
+
+### 5. Build React App
 
 Create a `build` folder with optimized production assets for deployment.
 
@@ -66,7 +76,7 @@ Create a `build` folder with optimized production assets for deployment.
 npm run build
 ```
 
-### 4. Install Server and Deploy
+### 6. Install Server and Deploy
 
 ```bash
 npm install -g serve

@@ -4,6 +4,17 @@ export default function NumberSelector({
   min = 1,
   "data-testid": testId,
 }) {
+  const handleInputChange = (e) => {
+    const raw = e.target.value;
+    const parsed = parseInt(raw, 10);
+
+    if (isNaN(parsed) || parsed < min) {
+      onChange(min);
+    } else {
+      onChange(parsed);
+    }
+  };
+
   const handleDecrement = () => {
     if (value > min) onChange(value - 1);
   };
@@ -26,7 +37,7 @@ export default function NumberSelector({
         type="number"
         min={min}
         value={value}
-        onChange={(e) => onChange(parseInt(e.target.value))}
+        onChange={handleInputChange}
         data-testid={`input-${testId}`}
         className="w-16 text-center border border-stone-300 rounded-md py-1"
       />

@@ -27,14 +27,6 @@ function ProductDetailPage() {
       });
   }, [id]);
 
-  const handleQuantityChange = (value) => {
-    if (isNaN(value) || value < 1) {
-      setQuantity(1);
-    } else {
-      setQuantity(value);
-    }
-  };
-
   const handleAddToCart = () => {
     if (adding) return; // prevent multiple clicks
     setAdding(true);
@@ -114,7 +106,7 @@ function ProductDetailPage() {
           </span>
 
           <div className="flex items-center gap-3 mb-8">
-            <NumberSelector value={quantity} onChange={handleQuantityChange} />
+            <NumberSelector value={quantity} onChange={setQuantity} />
           </div>
 
           <div className="flex flex-col gap-3">

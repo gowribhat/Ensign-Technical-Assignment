@@ -2,8 +2,6 @@
 
 This repo contains **Assignment 2** — a small shopping-cart React app.
 
----
-
 ## Features
 
 - [x] Product listing page (retrieves items from [FakeStoreAPI](https://fakestoreapi.com))
@@ -18,8 +16,7 @@ This repo contains **Assignment 2** — a small shopping-cart React app.
 - [x] **Responsive UI** styled with Tailwind CSS
 - [x] **User feedback** via toast notifications (`react-hot-toast`)
 - [x] **Bonus:** Cart page tested with Jest + React Testing Library
-
----
+- [x] **Bonus:** CI/CD pipeline with GitHub Actions for automated testing and deployment
 
 ## Tech stack
 
@@ -30,6 +27,10 @@ This repo contains **Assignment 2** — a small shopping-cart React app.
 - **react-hot-toast** — lightweight toast notifications
 - **localStorage** — cart persistence across reloads
 - **Jest + React Testing Library** — unit & integration tests
+
+## Technical Decisions
+
+For detailed reasoning behind implementation choices, see [TECHNICAL_DECISIONS.md](./TECHNICAL_DECISIONS.md).
 
 ## Getting started
 
@@ -62,11 +63,11 @@ npm run start
 
 ### 4. Run Tests
 
+Run Jest tests in watch mode.
+
 ```bash
 npm test
 ```
-
-- Runs Jest tests in watch mode.
 
 ### 5. Build React App
 
@@ -76,7 +77,7 @@ Create a `build` folder with optimized production assets for deployment.
 npm run build
 ```
 
-### 6. Install Server and Deploy
+### 6. Install Server and Deploy Locally
 
 ```bash
 npm install -g serve

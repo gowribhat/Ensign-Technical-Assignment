@@ -1,8 +1,11 @@
 # Ensign Technical Assignment
 
-[![Node.js](https://img.shields.io/badge/Node-16+-green)](https://nodejs.org/)
 [![Build Status](https://github.com/gowribhat/Ensign-Technical-Assignment/actions/workflows/deploy.yml/badge.svg)](https://github.com/gowribhat/Ensign-Technical-Assignment/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue)](https://gowribhat.github.io/Ensign-Technical-Assignment/#/)
+
+[![Node.js](https://img.shields.io/badge/Node-16+-green)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://react.dev/)
+[![Jest](https://img.shields.io/badge/Tests-Jest-brightgreen?logo=jest)](https://jestjs.io/)
 
 This repository contains my submission for the technical assignment. The project is divided into two assignments:
 

@@ -26,7 +26,7 @@ This document outlines the technical decisions and assumptions made during the i
   - React Router provides simple client-side navigation with dynamic routes (`/products/:id`).
 - **Assumption:** Client-side routing is sufficient since backend integration is out of scope.
 
-### 2. Products Listing
+### 3. Products Listing
 
 - **Data Fetching with `fetch` + `useEffect`**
   - Used the built-in `fetch` API instead of Axios to avoid extra dependencies.
@@ -39,7 +39,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Assumes grid layout is the natural choice for e-commerce displays.
   - Product card emphasizes **name + price** (most important) with minimal description, since details are shown on the product page.
 
-### 3. Product Details Page
+### 4. Product Details Page
 
 - **Data Fetching with `fetch` + `useEffect`**
   - Dynamic route `/products/:id` to fetch individual product details.
@@ -54,7 +54,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Button label dynamically updates to reflect chosen quantity.
   - Improves usability and aligns with typical e-commerce expectations.
 
-### 4. Shopping Cart
+### 5. Shopping Cart
 
 - **Global State Management with React Context**
   - Created a `CartContext` to manage cart items globally.
@@ -74,7 +74,7 @@ This document outlines the technical decisions and assumptions made during the i
   - On large screens, summary is `sticky` (`lg:sticky lg:top-24`), keeping summary visible during scroll.
   - On small screens, summary stacks below for usability.
 
-### 5. MessageScreen Component
+### 6. MessageScreen Component
 
 - **Purpose:** Centralized handling of loading, empty, and error states.
 - **Reasoning:**
@@ -84,7 +84,7 @@ This document outlines the technical decisions and assumptions made during the i
   - SPA-Friendly Navigation: Used React Router <Link> instead of <a> to prevent full page reloads and maintain smooth client-side navigation.
 - **Implementation:** Configurable via props (`loading`, `title`, `description`, `callToAction`).
 
-### 6. User Feedback on Actions
+### 7. User Feedback on Actions
 
 - **Choice:** Added [react-hot-toast](https://react-hot-toast.com) for visual confirmations (e.g., “Product added to cart”).
 - **Reasoning:**
@@ -94,7 +94,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Centralizing toast logic in the `CartContext` ensures **all cart-related actions** (add, remove, clear) automatically trigger user feedback, reducing code duplication across pages.
 - **Assumption:** Using a popular, well-documented library like `react-hot-toast` will be acceptable since it balances UX benefits with minimal overhead.
 
-### 7. Preventing Duplicate Cart Entries
+### 8. Preventing Duplicate Cart Entries
 
 - **Choice:** Introduced an `adding` state (`useState`) for the "Add to Cart" button.
 - **Reasoning:**
@@ -104,7 +104,7 @@ This document outlines the technical decisions and assumptions made during the i
 - **Technical Note:** Used `setTimeout` to re-enable the button after a short delay. This ensures a balance between responsiveness and safety.
 - **Assumption:** The short delay does not hamper the user flow.
 
-### 8. NumberSelector Component
+### 9. NumberSelector Component
 
 - **Reusability:** Used on both product detail page and cart page.
 - **Validation:** Enforces minimum value of 1 and checks for valid values.
@@ -114,7 +114,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Quantities cannot be negative or zero.
   - Users may either type a number directly or use buttons to adjust quantity.
 
-### 9. Linking Cart Items to Product Details
+### 10. Linking Cart Items to Product Details
 
 - **Choice:** Make each product in the cart clickable, linking to its respective product details page (`/products/:id`).
 - **Reasoning:**
@@ -126,7 +126,7 @@ This document outlines the technical decisions and assumptions made during the i
   - Users expect cart items to be interactive.
   - Only the image and title are clickable, while quantity controls and remove button retain their original functionality.
 
-### 10. Cart Page – Sticky Order Summary
+### 11. Cart Page – Sticky Order Summary
 
 - **Choice:** The order summary on the right uses `lg:sticky lg:top-24 h-fit` (Tailwind).
   - `sticky` keeps it visible while scrolling within its container.
@@ -142,52 +142,55 @@ This document outlines the technical decisions and assumptions made during the i
   - Mobile users benefit from stacked layout rather than sticky elements to prevent overlap or cramped views.
   - Users prefer a receipt-like order summary.
 
-### 11. Testing Strategy & Decisions
+### 12. Confirmation Modal
+
+- **Purpose:** Provides a way for users to confirm their actions.
+- **Reasoning:**
+  - Prevents accidental cart deletion by requiring explicit confirmation.
+  - Improves user trust by ensuring irreversible actions (like clearing the cart) are double-checked.
+  - Aligns with standard e-commerce UX patterns, where destructive actions are gated by an extra step.
+  - Abstracts away implementation details for future reuse.
+- **Implementation:**
+  - Configurable via props (`title`, `message`, `onConfirm`, `onCancel`).
+  - Provides two clear actions.
+  - Can be used in any context, not just the cart page.
+- **Assumptions:**
+  - The short delay does not hamper the user flow.
+  - Users may misclick or change their mind, so protecting them from accidental cart loss is more valuable than saving one extra click.
+  - A lightweight modal is sufficient and no external libraries are needed beyond Tailwind and React state.
+
+### 13. Testing Strategy & Decisions
 
 - **Framework & Tools:**
-
   - **React Testing Library (RTL)** for rendering components and simulating user interactions in a way that mirrors real user behavior.
   - **Jest** as the test runner, leveraging mocking, assertions, and snapshot capabilities where needed.
-
 - **Scope of Tests:**
-
   - **CartContext:** `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`, localStorage persistence, and toast notifications.
   - **CartPage:** Rendering of empty cart, cart items, order summary calculations, quantity changes, and remove/clear actions.
-
 - **Helpers & Factories:**
-
   - `createCartItem` to generate cart items consistently.
   - `calculateTotals` to compute subtotal, tax, delivery fee, and total, avoiding duplicate calculations in multiple tests.
   - `renderWithCart` to wrap components in `CartContext.Provider`, simulating realistic state for tests.
-
 - **Test Reliability:**
-
   - `data-testid` attributes added for interactive elements like quantity inputs and increment/decrement buttons.
   - Verified elements exist before interacting to prevent false positives or flaky tests.
   - Mocks used for `react-hot-toast` to isolate toast behavior from actual library implementation.
-
 - **Organization & Readability:**
-
   - Tests grouped in meaningful `describe` blocks.
   - Promotes maintainability and allows others to understand which features each test covers.
-
 - **Assumptions & Reasoning:**
-
   - Jest mocking ensures tests are focused on cart logic without relying on external libraries or APIs.
   - Network requests (fakestoreapi) are not tested here — assumed to be stable; tests focus on cart logic and UI behavior.
   - Cart functionality is central to the application, so unit and integration tests prioritize correctness and persistence.
-
 - **Benefits:**
   - Prevents regressions in core cart functionality.
   - Documents expected behavior in a clear, executable format.
   - Improves confidence that both state and UI interactions behave as intended under different scenarios.
 
-### 12. CI/CD Pipeline
+### 14. CI/CD Pipeline
 
 - **Objective:** Demonstrate a professional, automated deployment workflow that ensures the React app is always live in a stable state.
-
 - **Implementation:** GitHub Actions (`deploy.yml`) automates the following steps on every push to `main`:
-
   - **Checkout code:** Retrieves the latest changes from the repository.
   - **Set up Node.js environment:** Ensures a consistent Node version across all runs.
   - **Install dependencies:** `npm ci` installs exact versions from `package-lock.json` for reproducible builds.
@@ -195,13 +198,10 @@ This document outlines the technical decisions and assumptions made during the i
     - **Why watchAll is false:** We don’t need an interactive watch mode in CI; it ensures tests run once and the workflow completes without hanging.
   - **Build the app:** Creates an optimized, production-ready bundle using `npm run build`.
   - **Deploy to GitHub Pages:** Publishes the build to the `gh-pages` branch using `peaceiris/actions-gh-pages@v3`.
-
 - **Technical Decisions & Rationale:**
-
   - Automating deployment removes manual steps and reduces the chance of mistakes.
   - Running tests before building guarantees that only working, validated code goes live.
   - Leveraging GitHub Actions and `gh-pages` keeps the workflow simple, reliable, and free of extra infrastructure.
-
 - **Outcome / Benefits:**
   - Ensures the [live site](https://gowribhat.github.io/Ensign-Technical-Assignment/#/) is always up-to-date with the latest changes.
   - Automates deployment so fewer manual steps are needed.

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Ensign-Technical-Assignment/static/css/main.e4a47c2f.css",
-    "main.js": "/Ensign-Technical-Assignment/static/js/main.9ca13b49.js",
+    "main.js": "/Ensign-Technical-Assignment/static/js/main.82271579.js",
     "static/js/453.47465e55.chunk.js": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js",
     "index.html": "/Ensign-Technical-Assignment/index.html",
     "main.e4a47c2f.css.map": "/Ensign-Technical-Assignment/static/css/main.e4a47c2f.css.map",
-    "main.9ca13b49.js.map": "/Ensign-Technical-Assignment/static/js/main.9ca13b49.js.map",
+    "main.82271579.js.map": "/Ensign-Technical-Assignment/static/js/main.82271579.js.map",
     "453.47465e55.chunk.js.map": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e4a47c2f.css",
-    "static/js/main.9ca13b49.js"
+    "static/js/main.82271579.js"
   ]
 }

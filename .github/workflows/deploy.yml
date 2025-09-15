@@ -1,4 +1,4 @@
-name: Deploy Assignments to GitHub Pages
+name: Deploy React App to GitHub Pages
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,21 +18,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install and Build Assignment 2
+      - name: Install dependencies
         working-directory: ./assignment2
-        run: |
-          npm ci
-          npm run build
+        run: npm ci
 
-      - name: Prepare deployment folder
-        run: |
-          rm -rf ./deploy
-          mkdir -p ./deploy/assignment2
-          cp -r ./assignment1/* ./deploy/
-          cp -r ./assignment2/build/* ./deploy/assignment2/
+      - name: Build React App
+        working-directory: ./assignment2
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./deploy
+          publish_dir: ./assignment2/build

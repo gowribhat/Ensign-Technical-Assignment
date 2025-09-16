@@ -56,7 +56,7 @@ function ProductDetailPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
+    <div className="max-w-7xl mx-auto px-6 py-8">
       <Link
         to="/"
         className="mb-8 inline-flex items-center gap-2 text-amber-800 hover:text-stone-600 transition w-fit text-base"
@@ -83,17 +83,37 @@ function ProductDetailPage() {
             {product.category}
           </span>
 
-          <div className="flex items-center gap-2 mb-2">
-            {Array.from({ length: 5 }, (_, i) => (
-              <StarIcon
-                key={i}
-                className={`w-6 h-6 ${
-                  i < Math.round(product.rating.rate)
-                    ? "text-amber-500"
-                    : "text-stone-300"
-                }`}
-              />
-            ))}
+          <div
+            className="flex items-center gap-2 mb-2"
+            title={`Rating: ${product.rating.rate.toFixed(2)} / 5`}
+          >
+            {Array.from({ length: 5 }, (_, i) => {
+              const rating = product.rating.rate;
+              const full = i + 1 <= Math.floor(rating);
+              const partial = i < rating && i + 1 > rating;
+
+              return (
+                <div key={i} className="relative w-6 h-6">
+                  {/* Empty star */}
+                  <StarIcon className="w-6 h-6 text-stone-300 absolute top-0 left-0" />
+
+                  {/* Full star */}
+                  {full && (
+                    <StarIcon className="w-6 h-6 text-amber-500 absolute top-0 left-0" />
+                  )}
+
+                  {/* Partial star */}
+                  {partial && (
+                    <div
+                      className="overflow-hidden absolute top-0 left-0"
+                      style={{ width: `${(rating - i) * 100}%` }}
+                    >
+                      <StarIcon className="w-6 h-6 text-amber-500" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <span className="text-stone-500 text-sm">
               {product.rating.count} reviews
             </span>

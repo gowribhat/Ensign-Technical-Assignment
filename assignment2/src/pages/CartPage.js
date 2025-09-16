@@ -41,7 +41,7 @@ function CartPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-7xl mx-auto px-6 py-8">
       <Link
         to="/"
         className="mb-8 inline-flex items-center gap-2 text-amber-800 hover:text-stone-600 transition w-fit text-base"
@@ -67,7 +67,7 @@ function CartPage() {
         Your Cart
       </h2>
 
-      <hr className="border-t border-amber-200 mb-8 w-32" />
+      <hr className="border-t border-amber-200 mb-2 w-32" />
 
       <div className="flex flex-col lg:flex-row gap-12">
         <div className="flex-1 flex flex-col gap-6">

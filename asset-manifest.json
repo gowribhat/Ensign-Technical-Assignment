@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Ensign-Technical-Assignment/static/css/main.9d0ea696.css",
-    "main.js": "/Ensign-Technical-Assignment/static/js/main.7a26ff1c.js",
-    "static/js/453.47465e55.chunk.js": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js",
-    "index.html": "/Ensign-Technical-Assignment/index.html",
-    "main.9d0ea696.css.map": "/Ensign-Technical-Assignment/static/css/main.9d0ea696.css.map",
-    "main.7a26ff1c.js.map": "/Ensign-Technical-Assignment/static/js/main.7a26ff1c.js.map",
-    "453.47465e55.chunk.js.map": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js.map"
+    "main.css": "./static/css/main.9d0ea696.css",
+    "main.js": "./static/js/main.3a1c3b56.js",
+    "static/js/453.47465e55.chunk.js": "./static/js/453.47465e55.chunk.js",
+    "index.html": "./index.html",
+    "main.9d0ea696.css.map": "./static/css/main.9d0ea696.css.map",
+    "main.3a1c3b56.js.map": "./static/js/main.3a1c3b56.js.map",
+    "453.47465e55.chunk.js.map": "./static/js/453.47465e55.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9d0ea696.css",
-    "static/js/main.7a26ff1c.js"
+    "static/js/main.3a1c3b56.js"
   ]
 }

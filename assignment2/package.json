@@ -2,7 +2,7 @@
   "name": "assignment2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gowribhat.github.io/Ensign-Technical-Assignment",
+  "homepage": ".",
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@testing-library/dom": "^10.4.1",

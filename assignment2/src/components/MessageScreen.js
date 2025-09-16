@@ -9,7 +9,7 @@ export default function MessageScreen({
   callToAction,
 }) {
   return (
-    <div className="h-screen flex flex-col items-center justify-center px-6 text-center">
+    <div className="h-full flex flex-col items-center justify-center px-6 text-center">
       {loading ? (
         <>
           <div className="w-16 h-16 border-4 border-beige border-t-amber-800 rounded-full animate-spin mb-4"></div>

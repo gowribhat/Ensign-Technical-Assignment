@@ -2,7 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import MessageScreen from "../components/MessageScreen";
-import { StarIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
+import {
+  StarIcon,
+  ChevronLeftIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/solid";
 import NumberSelector from "../components/NumberSelector";
 
 function ProductDetailPage() {
@@ -42,6 +46,9 @@ function ProductDetailPage() {
   if (!product) {
     return (
       <MessageScreen
+        icon={
+          <ExclamationTriangleIcon className="w-20 h-20 mx-auto text-amber-600" />
+        }
         title="Product not found"
         description="We couldn’t find the product you’re looking for."
       />

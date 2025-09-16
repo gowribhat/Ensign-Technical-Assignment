@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MessageScreen from "../components/MessageScreen";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -29,6 +30,9 @@ function ProductsPage() {
   if (error) {
     return (
       <MessageScreen
+        icon={
+          <ExclamationTriangleIcon className="w-20 h-20 mx-auto text-amber-600" />
+        }
         title="Unable to load products"
         description="Please try again later."
       />

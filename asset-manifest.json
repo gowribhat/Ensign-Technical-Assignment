@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Ensign-Technical-Assignment/static/css/main.ea7d03a0.css",
-    "main.js": "/Ensign-Technical-Assignment/static/js/main.2b16a224.js",
+    "main.css": "/Ensign-Technical-Assignment/static/css/main.1fc93f70.css",
+    "main.js": "/Ensign-Technical-Assignment/static/js/main.a78ccd90.js",
     "static/js/453.47465e55.chunk.js": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js",
     "index.html": "/Ensign-Technical-Assignment/index.html",
-    "main.ea7d03a0.css.map": "/Ensign-Technical-Assignment/static/css/main.ea7d03a0.css.map",
-    "main.2b16a224.js.map": "/Ensign-Technical-Assignment/static/js/main.2b16a224.js.map",
+    "main.1fc93f70.css.map": "/Ensign-Technical-Assignment/static/css/main.1fc93f70.css.map",
+    "main.a78ccd90.js.map": "/Ensign-Technical-Assignment/static/js/main.a78ccd90.js.map",
     "453.47465e55.chunk.js.map": "/Ensign-Technical-Assignment/static/js/453.47465e55.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea7d03a0.css",
-    "static/js/main.2b16a224.js"
+    "static/css/main.1fc93f70.css",
+    "static/js/main.a78ccd90.js"
   ]
 }
